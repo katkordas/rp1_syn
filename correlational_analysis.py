@@ -2,12 +2,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
-from scipy.stats import levene
 from scipy.stats import norm
 
 # Reading preprocessed data
 syn_responses = pd.read_csv("processed_data.csv")
-# Reading data for 
 
 # All of the hypothesis testing in this file is based on the method from Brang et al. (2011)
 # Source: https://doi.org/10.1016/j.neuropsychologia.2011.01.002
