@@ -33,4 +33,4 @@ for i in ids:
                 syn_responses.drop(syn_responses.loc[(syn_responses["id"] == i) & (syn_responses["stimulus"] == s) & (syn_responses["rep"] == r)].index, inplace=True)
 
 # Saving the preprocessed data
-syn_responses.to_csv("syn_no_out.csv")
+syn_responses.to_csv("processed_data.csv")
