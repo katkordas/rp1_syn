@@ -5,9 +5,12 @@ from scipy.stats import binomtest
 df = pd.read_csv("processed_data.csv")
 syn_responses = df[["id","stimulus","color_bk"]].groupby(["id","stimulus"]).agg(pd.Series.mode).reset_index()
 
+# Checking the number of synesthetes
 n = syn_responses.shape[0]
 n_part = len(syn_responses["id"].unique())
 print("N synesthetes: "  + str(n_part))
+
+# Finding the average (i.e. mode) color category per letter (for each participant)
 
 # Taking care of multiple modes
 # If there are three modes, we are just taking the first choice
@@ -23,7 +26,7 @@ syn_responses["color"] = colors
 syn_responses = syn_responses.value_counts(subset=["stimulus","color"]).to_frame().sort_index().reset_index()
 syn_responses = syn_responses.rename(columns={0:'count'})
 
-# Making lists for name-colour name pairings
+# Making lists for name-colour name pairings in Polish
 colorterm_dict = {"B" : ["White","Brown"], "C" : ["Black","Red"], "F" : "Purple", "N" : "Blue", "P" : "Orange", "R" : "Pink", "S" : "Grey", "Z" : "Green", "Ż" : "Yellow"}
 
 # Adding conditional column to dataframe
@@ -61,9 +64,10 @@ matches_possible = could_match["count"].sum()
 # Let's calculate the pseudo R2 value!
 obs_r2 = matches_obs/matches_possible
 print("The observed R2 is: " + str(obs_r2))
+
+
 # Now let's calculate the other statistic
 # Starting with the total number of associations in the data, multiplied by the proportion of associations that are the grapheme g,3 multiplied by the proportion of associations that are the color c
-
 p_total = 0
 for i in colorterm_dict.keys():
     if isinstance(colorterm_dict[i], str):
